@@ -1,0 +1,5 @@
+node_modules/
+.lakebed/
+.DS_Store
+*.swp
+npm-debug.log*
