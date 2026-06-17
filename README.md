@@ -31,6 +31,29 @@ npx riverbed build --target anonymous --json
 
 The `lakebed` bin alias is also kept for compatibility when this package is installed directly.
 
+## Local Development
+
+To use this checkout locally from another capsule, install Riverbed from this directory:
+
+```sh
+npm install /Users/hitesh/projects/lakebed/riverbed
+```
+
+Then run the local CLI through `npx`:
+
+```sh
+npx riverbed new my-todo --template todo
+cd my-todo
+npx riverbed dev
+```
+
+For quick checks while working on Riverbed itself, you can also run the repo's CLI directly:
+
+```sh
+node /Users/hitesh/projects/lakebed/riverbed/bin/lakebed.js new /private/tmp/my-todo --template todo --no-git
+node /Users/hitesh/projects/lakebed/riverbed/bin/lakebed.js dev /private/tmp/my-todo
+```
+
 ## Capsule Shape
 
 Riverbed expects the same Lakebed v0 layout:
@@ -44,3 +67,20 @@ shared/
 Server code imports from `lakebed/server`. Client code imports from `lakebed/client`.
 
 Styling is done with Tailwind classes in JSX.
+
+## FAQ
+
+<details>
+<summary>How do I check that bundled Tailwind CSS is working?</summary>
+
+Create the todo template, start the dev server, and confirm the app is styled without adding a Tailwind config or CSS entry file:
+
+```sh
+npx riverbed new tailwind-check --template todo
+cd tailwind-check
+npx riverbed dev
+```
+
+Riverbed should serve `/client.css` automatically alongside `/client.js`.
+
+</details>

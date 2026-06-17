@@ -169,7 +169,7 @@ export async function buildTailwindCss(sourceStore, buildDir) {
         ? join(packageNodeModules, ".bin", "tailwindcss.cmd")
         : join(packageNodeModules, ".bin", "tailwindcss");
     await new Promise((resolveBuild, rejectBuild) => {
-        execFile(tailwindBin, ["-i", inputCss, "-o", clientCssOut, "--minify"], { cwd: tailwindDir }, (error, stdout, stderr) => {
+        execFile(tailwindBin, ["-i", inputCss, "-o", clientCssOut, "--minify"], { cwd: tailwindDir, env: { ...process.env, NODE_PATH: packageNodeModules } }, (error, stdout, stderr) => {
             if (error) {
                 rejectBuild(new Error(`Tailwind CSS build failed:\n${stderr || stdout || error.message}`));
                 return;
